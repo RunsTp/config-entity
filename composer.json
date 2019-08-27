@@ -1,0 +1,23 @@
+{
+  "name": "easyswoole/config-entity",
+  "type": "library",
+  "description": "php config object lib",
+  "authors": [
+    {
+      "name": "RunsTp",
+      "email": "runstp@163.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.1.0",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "easyswoole/phpunit": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "EasySwoole\\ConfigEntity\\": "src/"
+    }
+  }
+}
