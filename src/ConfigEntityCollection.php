@@ -86,7 +86,7 @@ class ConfigEntityCollection implements Iterator, JsonSerializable, Serializable
         $tmpArray = [];
         /** @var ConfigEntity $entity */
         foreach ($this->entityCollection as $entity) {
-            $tmpArray[] = $entity->serialize();
+            $tmpArray[$entity->getKey()] = $entity->jsonSerialize();
         }
         return $tmpArray;
     }

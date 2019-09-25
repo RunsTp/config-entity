@@ -145,11 +145,9 @@ class ConfigEntity implements JsonSerializable, Serializable
     {
         $tmpArray = [];
         foreach ($this as $key => $value) {
-            if ($value instanceof self) {
+            if ($value instanceof JsonSerializable) {
                 $value = $value->jsonSerialize();
-            }
-
-            if ($value instanceof Serializable) {
+            } elseif ($value instanceof Serializable) {
                 $value = $value->serialize();
             }
             $tmpArray[$key] = $value;
