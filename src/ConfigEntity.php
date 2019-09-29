@@ -41,6 +41,16 @@ class ConfigEntity implements JsonSerializable, Serializable
             }
 
             if (!empty($this->type) && class_exists($this->type)) {
+                /** 如果是 ConfigEntityCollection 则 new */
+                if ($this->type === ConfigEntityCollection::class) {
+                    if (is_array($this->value)) {
+                        $this->value = new ConfigEntityCollection($this->value);
+                    } elseif (is_string($this->value)) {
+                        $this->value = (new ConfigEntityCollection)->unserialize($this->value);
+                    }
+                    return;
+                }
+
                 /** 使用反射判断type */
                 $ref = new ReflectionClass($this->type);
                 if ($ref->isSubclassOf(Serializable::class) && is_string($this->value)) {
