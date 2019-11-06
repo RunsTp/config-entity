@@ -53,8 +53,14 @@ class ConfigEntity implements JsonSerializable, Serializable
 
                 /** 使用反射判断type */
                 $ref = new ReflectionClass($this->type);
+                if ($ref->isSubclassOf('EasySwoole\Spl\SplBean') && is_string($this->value)) {
+                    $this->value = new $this->type(json_decode($this->value, true));
+                    return;
+                }
+
                 if ($ref->isSubclassOf(Serializable::class) && is_string($this->value)) {
                     $this->value = (new $this->type())->unserialize($this->value);
+                    return;
                 }
             }
         }
